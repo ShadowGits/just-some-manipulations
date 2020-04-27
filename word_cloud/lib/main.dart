@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:grouped_buttons/grouped_buttons.dart';
+import 'package:wordcloud/ActionButton.dart';
 
 import 'size_config.dart';
 
@@ -10,8 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData.dark().copyWith(
-        backgroundColor: Color(0xFF00ABB0),
+      theme: ThemeData.dark(
       ),
       home: HomeTextEntry(),
     );
@@ -27,10 +28,16 @@ class HomeTextEntry extends StatefulWidget {
 class _HomeTextEntryState extends State<HomeTextEntry> {
 
   String _textInput;
+  String _buttonChoice;
   @override
   Widget build(BuildContext context) {
     var horizVal = displaySafeWidthBlocks(context);
     var vertVal = displaySafeHeightBlocks(context);
+
+    Map<String,IconData> iconsGroupData={
+      "Reset":Icons.autorenew,
+      "Get Cloud":Icons.print
+    };
 
     return Scaffold(
       appBar: AppBar(
@@ -58,15 +65,44 @@ class _HomeTextEntryState extends State<HomeTextEntry> {
                       _textInput=text;
                       print(_textInput);
                     },
-
                   ),
                 ),
               ),
+          Padding(
+            padding: const EdgeInsets.only(right:18.0,top: 4),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children:<Widget>[
+                RadioButtonGroup(
+              orientation: GroupedButtonsOrientation.HORIZONTAL,
+              margin: const EdgeInsets.only(left: 12.0),
+              onSelected: (String selected) => setState((){
+                _buttonChoice = selected;
+              }),
+              labels: <String>[
+                "Reset",
+                "Get Cloud",
+              ],
+              picked: _buttonChoice,
+              itemBuilder: (Radio rb, Text txt, int i){
+                return Row(
+                  children: <Widget>[
+                    rb,
+                    txt,
+                  ],
+                );
+              },
+        ),
+                ActionButton(
+                  ontap: () {
 
-              FlatButton(
-
-
-              )
+                  },
+                  width: 25*horizVal,
+                  height: vertVal*6,
+                ),
+              ],
+            ),
+          ),
             ],
           ),
         ),
