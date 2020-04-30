@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:grouped_buttons/grouped_buttons.dart';
 import 'package:wordcloud/ActionButton.dart';
+import 'package:wordcloud/API.dart';
 
+import 'constants.dart';
 import 'size_config.dart';
 
 void main() => runApp(MyApp());
@@ -61,9 +65,12 @@ class _HomeTextEntryState extends State<HomeTextEntry> {
                       hintText: "Yeah it goes here"
                     ),
                     onChanged: (text)
-                    {
+                    async {
                       _textInput=text;
                       print(_textInput);
+                      var imageJson=await putImageInEncodedForm(url);
+                      var decodeData=jsonDecode(imageJson);
+                      print(decodeData['data']);
                     },
                   ),
                 ),
