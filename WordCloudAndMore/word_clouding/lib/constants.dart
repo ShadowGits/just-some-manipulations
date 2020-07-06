@@ -1,1 +1,1 @@
-const String url = "http://127.0.0.1:5000/Image";
+const String url = "https://the-word-cloud-app.herokuapp.com/Image";

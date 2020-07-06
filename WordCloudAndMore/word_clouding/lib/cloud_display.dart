@@ -7,13 +7,17 @@ import 'package:path_provider/path_provider.dart';
 
 import 'size_config.dart';
 
-class CloudDisplay extends StatelessWidget {
-  final String imageText;
+var current=1;
+class CloudDisplay extends StatefulWidget {
 
-  final String imageInvertText ;
+  final List<File> files;
+  CloudDisplay({@required this.files});
 
-  CloudDisplay({@required this.imageText, @required this.imageInvertText});
+  @override
+  _CloudDisplayState createState() => _CloudDisplayState();
+}
 
+class _CloudDisplayState extends State<CloudDisplay> {
 
 
   @override
@@ -21,50 +25,84 @@ class CloudDisplay extends StatelessWidget {
     var horizVal = displaySafeWidthBlocks(context);
     var vertVal = displaySafeHeightBlocks(context);
 
+    File imageFile=widget.files[current-1];
 
+    return SafeArea(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Container(
+            height: 80 * vertVal,
+            width: 100 * horizVal,
+child: ImageFileWidget(vertVal: vertVal, horizVal: horizVal, imageFile: imageFile),
+//            child: ListView.separated(
+//                separatorBuilder: (context, index) {
+//                  return SeparatorCustom();
+//                },
+//
+//                scrollDirection: Axis.vertical,
+//                itemCount: 2,
+//                itemBuilder: (context, index) {
+//                  return ImageFileWidget(vertVal: vertVal,
+//                    horizVal: horizVal,
+//                    imageFile:imageFiles[index] ,);
+//                }
+//
+//
+//            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              FlatButton(
+                onPressed: () {
+                  setState(() {
+                    if(current==1)
+                      current=3;
+                    else if(current==3)
+                      current=1;
+                    else if(current==2)
+                      current=4;
+                    else
+                      current=2;
+                  });
+                },
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.red)
+                ),
+                child: Text("MASK/UNMASK"),
+              ),
+              FlatButton(
+                onPressed: () {
+                  setState(() {
+                    if(current==1)
+                      current=2;
+                    else if(current==2)
+                      current=1;
+                    else if(current==3)
+                      current=4;
+                    else
+                      current=3;
+                  });
+                },
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.red)
+                ),
+                child: Text("INVERT"),
+              ),
+            ],
+          ),
 
-
-    Future<List<File>> _write() async {
-      final Directory directory = await getApplicationDocumentsDirectory();
-      print(directory.path);
-      final File file = File('${directory.path}/decodedCloud.png');
-      final decodedBytes = base64Decode(imageText);
-      await file.writeAsBytes(decodedBytes);
-      final File fileI = File('${directory.path}/decodedCloudInvert.png');
-      final decodedBytesI = base64Decode(imageInvertText);
-      await fileI.writeAsBytes(decodedBytesI);
-
-      print("IMAGE WRITTEN");
-      return [file,fileI];
-    }
-
-
-
-         return FutureBuilder<List<File>>(
-           future: _write(),
-           builder: (BuildContext context,AsyncSnapshot<List<File>> snapshot) {
-             return SafeArea(
-               child: ListView.separated(
-                 separatorBuilder: (context,index){
-return SeparatorCustom();},
-
-                 scrollDirection: Axis.horizontal,
-itemCount: 2,
-itemBuilder: (context,index)
-                   {
-                     return ImageFileWidget(vertVal: vertVal,horizVal: horizVal,imageFile: snapshot.data[index],);
-                   }
-
-
-               ),
-             );
-           }
-         );
-
-        }
-
-
+        ],
+      ),
+    );
   }
+
+}
 
 class ImageFileWidget extends StatelessWidget {
   const ImageFileWidget({
@@ -83,7 +121,7 @@ class ImageFileWidget extends StatelessWidget {
 
 
           return Container(
-            height: 80 * vertVal,
+            height: 40 * vertVal,
             width: 90 * horizVal,
             child: Card(
               color: Colors.black,
@@ -94,7 +132,7 @@ class ImageFileWidget extends StatelessWidget {
               elevation: 5,
               child: Container(
                 width: 90*horizVal,height: 70*vertVal,
-                child: Image.file(imageFile),
+                child:Image.file(imageFile)
               ),
         ),
           );
@@ -110,9 +148,7 @@ class SeparatorCustom extends StatelessWidget {
     var horizVal = displaySafeWidthBlocks(context);
     var vertVal = displaySafeHeightBlocks(context);
     return Container(
-      child: Icon(Icons.arrow_forward_ios,
-      color: Colors.pink,),
-      height: 46 * vertVal,
+      height: 1 * vertVal,
       width: 10*horizVal,
       color: Colors.black12,
     );

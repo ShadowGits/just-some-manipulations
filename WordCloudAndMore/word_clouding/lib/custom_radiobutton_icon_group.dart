@@ -45,7 +45,6 @@ class _CustomRadioButtonIconGroupState extends State<CustomRadioButtonIconGroup>
             child: GestureDetector(
               onTap: (){
                 setState(() {
-                  print(iconColors);
                   widget.notifyParent([true,false]);
                 });
               },
@@ -63,7 +62,6 @@ class _CustomRadioButtonIconGroupState extends State<CustomRadioButtonIconGroup>
               onTap: (){
                   setState(() {
 
-                    print(iconColors);
                     widget.notifyParent([false,true]);
                   });
                 },
