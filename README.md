@@ -1,4 +1,4 @@
-# just_some_manipulations
+# just_some_manipulations(V2)
 A flutter app to create wordlcloud of user input text. 
 Currently a horse shaped mask is used as a default shape for wordcloud.
 
@@ -9,6 +9,8 @@ Currently a horse shaped mask is used as a default shape for wordcloud.
     :Custom icon radio button made for UI furnishing.<br/>
 ## Backend Interactioons
 - Python Flask, REST API<br/>
+    : repo link https://github.com/ShadowGits/word_cloud_flask_deploy<br/>
+    : API also hosted at heroku so no more localhost running needed<br/>
     :Text to masked wordcloud implemented in backend through python<br/>
     :Image generated is encoded to base64 string and sent in json format<br/>
     :http post used to fetch text from UI and create cloud.<br/>
