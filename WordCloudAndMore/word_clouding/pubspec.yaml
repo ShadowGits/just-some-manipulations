@@ -30,6 +30,7 @@ dependencies:
   path_provider: ^1.6.11
   progress_indicators: ^0.1.2
   loader: ^0.4.0
+  image_picker: ^0.6.7+4
 
 
   # The following adds the Cupertino Icons font to your application.

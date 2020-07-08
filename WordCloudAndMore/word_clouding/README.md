@@ -1,16 +1,16 @@
-# just_some_manipulations(V2)
-A flutter app to create wordlcloud of user input text. 
-Currently a horse shaped mask is used as a default shape for wordcloud.
+# word_clouding
 
-## Frontend and UI Interactions
-- Dart and Flutter<br/>
-    :http post methods used to fetch data<br/>
-    :Image encoded in base 64 string used to write bytes to a file and the load the image generated.<br/>
-    :Custom icon radio button made for UI furnishing.<br/>
-## Backend Interactioons
-- Python Flask, REST API<br/>
-    : repo link https://github.com/ShadowGits/word_cloud_flask_deploy<br/>
-    : API also hosted at heroku so no more localhost running needed<br/>
-    :Text to masked wordcloud implemented in backend through python<br/>
-    :Image generated is encoded to base64 string and sent in json format<br/>
-    :http post used to fetch text from UI and create cloud.<br/>
+A new Flutter application.
+
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

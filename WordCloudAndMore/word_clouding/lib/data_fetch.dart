@@ -11,8 +11,9 @@ import 'API.dart';
 import 'constants.dart';
 
 class DataFetch extends StatefulWidget {
-  final String _textInput;
-  DataFetch(this._textInput);
+  final List<Object> arguments;
+
+  DataFetch(this.arguments);
 
   @override
   _DataFetchState createState() => _DataFetchState();
@@ -23,14 +24,21 @@ class _DataFetchState extends State<DataFetch> with LoadingMixin<DataFetch> {
 
   Future<List<String>> _getImageStrings()
   async{
-                String textInput=widget._textInput;
+                String textInput=widget.arguments[0];
                 var parsed;
                 List<String> imageStrings=["","","",""];
                 if (textInput == 'Check Data' || textInput.length == 0) {
                   parsed = await getImageInEncodeForm(url);
+
                 }
                 else {
-                  parsed = await putImageInEncodedForm(url, textInput);
+                  print(widget.arguments[1]);
+                  if(widget.arguments[1]) {
+                    parsed = await putImageInEncodedFormWithCustomMask(urlMask, textInput,widget.arguments[2]);
+                  }
+                  else{
+                    parsed = await putImageInEncodedForm(url, textInput);
+                  }
                 }
 
                 var jsonData = json.decode(parsed);
