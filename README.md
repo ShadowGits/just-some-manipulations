@@ -1,6 +1,7 @@
 # just_some_manipulations(V2)
 A flutter app to create wordlcloud of user input text. 
-Currently a horse shaped mask is used as a default shape for wordcloud.
+Default mask used with no mask input.
+Custom mask option in drawer menu.
 
 ## Frontend and UI Interactions
 - Dart and Flutter<br/>
